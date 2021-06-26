@@ -13,19 +13,15 @@ export const getAllProducts = (req, res) => {
 }
 
 export const searchProducts = async (req, res, next) => {
-    const searchQuery = new RegExp('skksdbvuksdv', 'g')
-    Products.find({
-        $or: [
-            {seller_name: searchQuery},
-            {specification: searchQuery},
-            {long_description: searchQuery},
-            {productName: searchQuery}
-        ]
-    }, (err, products) => {
+    const searchQuery = req.query.id.toLowerCase()
+    Products.find({}, (err, products) => {
         if (err) {
             res.send(err)
         }
-        res.json(products)
+        const filter = products.filter((item) => (item.product_name.toLowerCase()).indexOf(searchQuery) > -1 ||
+            item.category.toLowerCase() === searchQuery ||
+            (item.specification.toLowerCase()).indexOf(searchQuery) > -1)
+        res.json(filter)
     })
 }
 

@@ -5,6 +5,7 @@ import {
     getProduct, getProductsByCategory,
     searchProducts
 } from "../controllers/productController";
+import {getOrder, placeOrder} from "../controllers/orderController";
 
 const Router = express.Router()
 
@@ -64,6 +65,30 @@ Router.route('/signup')
         console.log(`Request type : ${req.method}`)
         next()
     }, signUpUser)
+
+Router.route('/checkout')
+    .post((req, res, next) => {
+        // middleware
+        console.log(`Request from : ${req.originalUrl}`)
+        console.log(`Request type : ${req.method}`)
+        next()
+    }, placeOrder)
+
+Router.route('/order')
+    .get((req, res, next) => {
+        // middleware
+        console.log(`Request from : ${req.originalUrl}`)
+        console.log(`Request type : ${req.method}`)
+        next()
+    }, getOrder)
+
+Router.route('/orders')
+    .get((req, res, next) => {
+        // middleware
+        console.log(`Request from : ${req.originalUrl}`)
+        console.log(`Request type : ${req.method}`)
+        next()
+    }, getOrder)
 
 
 export default Router
