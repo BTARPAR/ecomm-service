@@ -19,18 +19,18 @@ export const placeOrder = (req, res, next) => {
 }
 
 export const getOrder = async (req, res, next) => {
-    Order.find(req.query.id, (err, order) => {
+    Order.findOne({_id: req.query.id}, (err, order) => {
         if (err) {
             res.send(err)
         }
-        res.json(order)
+        return res.json(order)
     })
 }
 export const getOrders = async (req, res, next) => {
-    Order.find({}, (err, orders) => {
+    Order.find({}).sort({date: 1}).exec((err, orders) => {
         if (err) {
             res.send(err)
         }
-        res.json(orders)
+        return res.json(orders)
     })
 }

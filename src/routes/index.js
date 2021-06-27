@@ -5,7 +5,7 @@ import {
     getProduct, getProductsByCategory,
     searchProducts
 } from "../controllers/productController";
-import {getOrder, placeOrder} from "../controllers/orderController";
+import {getOrder, getOrders, placeOrder} from "../controllers/orderController";
 import {checkAuth} from "../middleware/checkAuth";
 
 const Router = express.Router()
@@ -97,7 +97,7 @@ Router.route('/orders')
         console.log(`Request from : ${req.originalUrl}`)
         console.log(`Request type : ${req.method}`)
         next()
-    }, getOrder)
+    }, getOrders)
 
 Router.route('/heartbeat')
     .get(checkAuth, (req, res) => {
