@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const OrderSchema = new Schema({
+export const OrderSchema = new Schema({
     fullname: {
         type: String,
     },
@@ -47,5 +47,3 @@ const OrderSchema = new Schema({
         default: new Date()
     }
 })
-
-module.exports = {OrderSchema}

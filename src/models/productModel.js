@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const ProductSchema = new Schema({
+export const ProductSchema = new Schema({
     product_name: {
         type: String,
         default: '',
@@ -44,11 +44,7 @@ const ProductSchema = new Schema({
     review: {
         type: Number
     },
-    category:{
+    category: {
         type: String
     }
 })
-
-// ProductSchema.index({seller_name: 'text'});
-
-module.exports = {ProductSchema}

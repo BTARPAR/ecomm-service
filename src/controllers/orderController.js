@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {OrderSchema} from "../models/OrderModel";
+import {OrderSchema} from "../models/orderModel";
 
 const Order = mongoose.model('Orders', OrderSchema, 'orders')
 

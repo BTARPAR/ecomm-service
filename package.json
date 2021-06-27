@@ -7,7 +7,7 @@
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src",
     "run": "nodemon ./index.js --exec babel-node -e js",
-    "build": "webpack --env.mode=production --env.outputPath=dist",
+    "build": "webpack --env.mode=production --env.outputPath=dist --display-error-details",
     "start": "node ./dist/index.js"
   },
   "dependencies": {

@@ -1,9 +1,7 @@
 const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
-const webpackConfig = ({
-  mode = 'development'
-}, argv)=>  ({
+const webpackConfig = ()=>  ({
     entry: './index.js',
     target: 'node',
     plugins: [
