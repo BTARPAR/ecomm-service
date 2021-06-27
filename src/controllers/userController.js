@@ -7,7 +7,6 @@ import {UserSchema} from '../models/userModel'
 const User = mongoose.model('User', UserSchema, 'users')
 
 export const signUpUser = (req, res) => {
-    console.log(req)
     const {password, email, ...rest} = req.body
     User.find({email}, (err, foundUser) => {
         if (err) {
@@ -40,6 +39,38 @@ export const signUpUser = (req, res) => {
                     message: 'User created successfully'
                 })
             })
+        })
+    })
+}
+
+export const resetPassword = (req, res) => {
+    const {password, confirm, email} = req.body
+
+    User.find({email}, (err, foundUser) => {
+        if (err) {
+            return res.send(err)
+        }
+        bcrypt.compare(password, foundUser[0].password, (err, result) => {
+            if (result) {
+                bcrypt.hash(confirm, 10, (err, hash) => {
+                    if (err) {
+                        return res.status(500).json({
+                            err
+                        })
+                    }
+
+                    User.findOneAndUpdate({email}, {password: hash}, (err) => {
+                        if (err) {
+                            res.send(err)
+                        }
+                        return res.status(201).send()
+                    })
+                })
+            } else {
+                return res.status(401).json({
+                    message: 'Unauthorized'
+                })
+            }
         })
     })
 }

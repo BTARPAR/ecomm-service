@@ -1,5 +1,5 @@
 import express from "express";
-import {signUpUser, userLogin} from "../controllers/userController";
+import {resetPassword, signUpUser, userLogin} from "../controllers/userController";
 import {
     getAllProducts,
     getProduct, getProductsByCategory,
@@ -73,7 +73,7 @@ Router.route('/reset')
         console.log(`Request from : ${req.originalUrl}`)
         console.log(`Request type : ${req.method}`)
         next()
-    }, signUpUser)
+    }, resetPassword)
 
 Router.route('/checkout')
     .post(checkAuth,(req, res, next) => {
@@ -101,7 +101,7 @@ Router.route('/orders')
 
 Router.route('/heartbeat')
     .get(checkAuth, (req, res) => {
-        res.status(201).send()
+        res.status(200).send()
     })
 
 
