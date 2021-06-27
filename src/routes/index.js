@@ -6,6 +6,7 @@ import {
     searchProducts
 } from "../controllers/productController";
 import {getOrder, placeOrder} from "../controllers/orderController";
+import {checkAuth} from "../middleware/checkAuth";
 
 const Router = express.Router()
 
@@ -66,8 +67,16 @@ Router.route('/signup')
         next()
     }, signUpUser)
 
+Router.route('/reset')
+    .post(checkAuth,(req, res, next) => {
+        // middleware
+        console.log(`Request from : ${req.originalUrl}`)
+        console.log(`Request type : ${req.method}`)
+        next()
+    }, signUpUser)
+
 Router.route('/checkout')
-    .post((req, res, next) => {
+    .post(checkAuth,(req, res, next) => {
         // middleware
         console.log(`Request from : ${req.originalUrl}`)
         console.log(`Request type : ${req.method}`)
@@ -75,7 +84,7 @@ Router.route('/checkout')
     }, placeOrder)
 
 Router.route('/order')
-    .get((req, res, next) => {
+    .get(checkAuth,(req, res, next) => {
         // middleware
         console.log(`Request from : ${req.originalUrl}`)
         console.log(`Request type : ${req.method}`)
@@ -83,12 +92,17 @@ Router.route('/order')
     }, getOrder)
 
 Router.route('/orders')
-    .get((req, res, next) => {
+    .get(checkAuth,(req, res, next) => {
         // middleware
         console.log(`Request from : ${req.originalUrl}`)
         console.log(`Request type : ${req.method}`)
         next()
     }, getOrder)
+
+Router.route('/heartbeat')
+    .get(checkAuth, (req, res) => {
+        res.status(201).send()
+    })
 
 
 export default Router
