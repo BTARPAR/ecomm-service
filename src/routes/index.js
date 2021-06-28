@@ -1,5 +1,5 @@
 import express from "express";
-import {resetPassword, signUpUser, userLogin} from "../controllers/userController";
+import {logoutUser, resetPassword, signUpUser, userLogin} from "../controllers/userController";
 import {
     getAllProducts,
     getProduct, getProductsByCategory,
@@ -103,6 +103,11 @@ Router.route('/heartbeat')
     .get(checkAuth, (req, res) => {
         res.status(200).send()
     })
+
+Router.route('/logout')
+    .get(checkAuth, (req, res) => {
+        res.status(200).send()
+    }, logoutUser)
 
 
 export default Router
